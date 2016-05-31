@@ -45,7 +45,7 @@ describe Oystercard do
   describe '#touch_in' do
     it 'raises an error if the balance is insufficient' do
       message = "Insufficient balance"
-      expect{ oystercard.touch_in(station)}.to raise_error message
+      expect{oystercard.touch_in(station)}.to raise_error message
     end
 
     it 'remembers entry station' do

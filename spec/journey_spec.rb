@@ -2,35 +2,34 @@ require 'oystercard'
 require 'journey'
 
 describe Journey do
-  subject(:journey) { described_class.new(oystercard = Oystercard.new)}
-  let(:top_up_amount) {Oystercard::MIN_FARE + 1}
+  subject(:journey) { described_class.new}
   let(:entrystation) {double(:entrystation)}
   let(:exitstation) {double(:exitstation)}
 
   describe'#complete?' do
 	  it 'starts a journey' do
-      journey.start
+      journey.start(entrystation)
       expect(journey.complete?).to eq false
     end
     it 'ends a journey' do
-    	journey.start
-    	journey.end
+    	journey.start(entrystation)
+    	journey.finish(exitstation)
     	expect(journey.complete?).to eq true
     end
   end
 
   describe '#start' do
-  	oystercard.top_up(top_up_amount)
-  	expect(journey.start(entrystation)).to eq entrystation 
+  	it 'remembers entry station' do
+  	expect(journey.start(entrystation)).to eq entrystation
   end
+end
 
+  describe '#finsh' do
 
-    
-
-it 'remembers entry station' do
-      
+    it 'remembers exit station' do
+      expect(journey.finish(exitstation)).to eq exitstation
     end
-  
+  end
 
 
 

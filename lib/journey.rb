@@ -2,16 +2,14 @@ require_relative 'oystercard'
 
 class Journey
 
-  def initialize(oystercard)
-    @oystercard = oystercard
-  end
-
-  def start
+  def start(entrystation)
   	@complete = false
+    @entry_station = entrystation
   end
 
-  def end
+  def finish(exitstation)
   	@complete = true
+    @exit_station = exitstation
   end
 
   def complete?

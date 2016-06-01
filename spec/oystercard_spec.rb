@@ -35,23 +35,6 @@ describe Oystercard do
       oystercard.touch_in
       expect{oystercard.touch_out}.to change{oystercard.balance}.by(-Oystercard::MIN_FARE)
     end
-
-    
   end
-
-    describe '#journey_history' do
-      it 'responds to method #journey_history' do
-        expect(oystercard).to respond_to(:journey_history)
-      end
-      it 'has no journeys saved by default' do
-        expect(oystercard.journey_history).to eq ({})
-      end
-      it 'records a journey' do
-        oystercard.top_up(top_up_amount)
-        oystercard.touch_in
-        oystercard.touch_out(exitstation)
-        expect(oystercard.journey_history).to eq ({entrystation => exitstation})
-      end
-    end
 
 end

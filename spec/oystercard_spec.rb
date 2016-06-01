@@ -3,8 +3,6 @@ require 'oystercard'
 describe Oystercard do
   subject(:oystercard) {described_class.new}
   let(:top_up_amount) {Oystercard::MIN_FARE + 1}
-  let(:entrystation) {double(:entrystation)}
-  let(:exitstation) {double(:exitstation)}
 
   describe '#balance' do
     it 'allows user to see starting balance of zero' do
@@ -27,15 +25,15 @@ describe Oystercard do
   describe '#touch_in' do
     it 'raises an error if the balance is insufficient' do
       message = "Insufficient balance"
-      expect{oystercard.touch_in(entrystation)}.to raise_error message
+      expect{oystercard.touch_in}.to raise_error message
     end
   end
 
   describe '#touch_out' do
     it 'reduces the balance by minimum fare' do
       oystercard.top_up(top_up_amount)
-      oystercard.touch_in(entrystation)
-      expect{oystercard.touch_out(exitstation)}.to change{oystercard.balance}.by(-Oystercard::MIN_FARE)
+      oystercard.touch_in
+      expect{oystercard.touch_out}.to change{oystercard.balance}.by(-Oystercard::MIN_FARE)
     end
 
     
@@ -50,7 +48,7 @@ describe Oystercard do
       end
       it 'records a journey' do
         oystercard.top_up(top_up_amount)
-        oystercard.touch_in(entrystation)
+        oystercard.touch_in
         oystercard.touch_out(exitstation)
         expect(oystercard.journey_history).to eq ({entrystation => exitstation})
       end

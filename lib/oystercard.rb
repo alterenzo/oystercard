@@ -18,7 +18,6 @@ class Oystercard
 
   def touch_in
     raise "Insufficient balance" if balance < MIN_BALANCE
-    
   end
 
   def touch_out

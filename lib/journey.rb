@@ -1,3 +1,5 @@
+require_relative 'oystercard'
+
 class Journey
 
   def initialize(oystercard)
@@ -5,6 +7,15 @@ class Journey
   end
 
   def start
-
+  	@complete = false
   end
+
+  def end
+  	@complete = true
+  end
+
+  def complete?
+  	@complete
+	end
+
 end

@@ -33,8 +33,6 @@ class Oystercard
     @entry_station = nil
   end
 
-
     private :deduct
-
 
 end

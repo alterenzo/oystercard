@@ -4,6 +4,8 @@ describe Oystercard do
   subject(:oystercard) {described_class.new}
   let(:top_up_amount) {Oystercard::MIN_FARE + 1}
   let(:station) {double(:station)}
+  let(:exit_station)
+    
   describe '#balance' do
     it 'allows user to see starting balance of zero' do
       expect(oystercard.balance).to eq 0
@@ -66,6 +68,13 @@ describe Oystercard do
       oystercard.touch_in(station)
       oystercard.touch_out
       expect(oystercard.entry_station).to eq nil
+    end
+
+    it 'remembers exit station' do
+      oystercard.top_up(top_up_amount)
+      oystercard.touch_in(station)
+      oystercard.touch_out(station)
+
     end
   end
 

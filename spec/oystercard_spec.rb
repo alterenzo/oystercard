@@ -30,7 +30,6 @@ describe Oystercard do
     end
 
     it 'reports when oystercard is not in use' do
-
       oystercard.top_up(top_up_amount)
       oystercard.touch_in(station)
       oystercard.touch_out

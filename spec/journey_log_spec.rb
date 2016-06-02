@@ -13,9 +13,9 @@ describe JourneyLog do
 
   describe "#start" do
 
-    it "Will report where the journey starts" do
-      expect(journey_log.start(entry_station)).to eq entry_station
-    end
+    # it "Will report where the journey starts" do
+    #   expect(journey_log.start(entry_station)).to eq entry_station
+    # end
 
     it "Will create a new journey" do
       journey_log.start(entry_station)
@@ -25,19 +25,20 @@ describe JourneyLog do
 
   describe "#finish" do
 
-    it "Creates a new journey if no entry" do
+    it "Sets the journey back to nil after touch out" do
+      journey_log.start(entry_station)
       journey_log.finish(exit_station)
-      expect(journey_log.current_journey).not_to be_nil
+      expect(journey_log.current_journey).to be_nil
     end
   end
 
-  describe "#journeys" do 
+  describe "#journeys" do
     it "returns the journey history" do
       journey_log = JourneyLog.new(journey_class)
       journey_log.start(entry_station)
       journey_log.finish(exit_station)
       expect(journey_log.journeys).to eq [journey]
-    
+
     end
   end
 

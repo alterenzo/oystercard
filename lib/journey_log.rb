@@ -1,4 +1,4 @@
-require 'Journey.rb'
+require_relative 'journey.rb'
 
 class JourneyLog
 
@@ -12,15 +12,24 @@ class JourneyLog
 
 #@journey.entry_station = entry_station
   def start(entry_station)
-    @current_journey = journey_class.new(entry_station)
-    entry_station
+    if @current_journey
+      fare = finish(nil)
+      @current_journey = journey_class.new(entry_station)
+      return fare
+    else
+      @current_journey = journey_class.new(entry_station)
+      return 0
+    end
   end
 
   def finish(exit_station)
     @current_journey ||= journey_class.new
     @current_journey.set_exit_station(exit_station)
     @journey_history << current_journey
-    @current_journey.fare
+
+    fare = @current_journey.fare
+    @current_journey = nil
+    fare
   end
 
   def journeys

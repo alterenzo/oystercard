@@ -7,6 +7,7 @@ class JourneyLog
   def initialize(journey_class = Journey)
     @journey_class = journey_class
     @current_journey = nil
+    @journey_history = []
   end
 
 #@journey.entry_station = entry_station
@@ -17,7 +18,17 @@ class JourneyLog
 
   def finish(exit_station)
     @current_journey ||= journey_class.new
-    exit_station
+    @current_journey.set_exit_station(exit_station)
+    @journey_history << current_journey
+    @current_journey.fare
+  end
+
+  def journeys
+    @journey_history.dup
+  end
+
+  def print_journey_history
+    @journey_history.to_s
   end
 
   private

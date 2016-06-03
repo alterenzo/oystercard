@@ -25,8 +25,10 @@ class Oystercard
 
   def touch_out(exitstation)
     raise "Invalid argument!" unless exitstation.respond_to?(:name)
-    deduct(Journey::MIN_FARE)
+
+
     @journeylog.finish(exitstation)
+    deduct(@journeylog.current_journey_fare)
   end
 
   def journeys

@@ -3,7 +3,7 @@ require 'oystercard'
 
 describe Oystercard do
   subject(:oystercard) {described_class.new}
-  let(:top_up_amount) {Journey::MIN_FARE + 1}
+  let(:top_up_amount) {Oystercard::MAX_BALANCE}
   let(:entrystation) {double :station, name: "entry"}
   let(:exitstation) {double :station, name: "exit"}
   let(:nonstation) {double :nonstation}
@@ -13,6 +13,8 @@ describe Oystercard do
     it 'allows user to see starting balance of zero' do
       expect(oystercard.balance).to eq 0
     end
+
+
   end
 
   describe '#top_up' do
@@ -44,6 +46,18 @@ describe Oystercard do
       oystercard.top_up(top_up_amount)
       oystercard.touch_in(entrystation)
       expect{oystercard.touch_out(exitstation)}.to change{oystercard.balance}.by(-Journey::MIN_FARE)
+    end
+
+    it 'adjusts balance by penalty fare if forget to touch in' do
+      oystercard.top_up(top_up_amount)
+      expect{oystercard.touch_out(exitstation)}.to change{oystercard.balance}.by(-Journey::PENALTY_FARE)
+    end
+
+    it 'adjusts balance by penlaty fare if forget to touch out' do
+      oystercard.top_up(top_up_amount)
+      oystercard.touch_in(entrystation)
+      expect{oystercard.touch_in(entrystation)}.to change{oystercard.balance}.by(-Journey::PENALTY_FARE)
+
     end
   end
 

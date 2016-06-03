@@ -1,4 +1,5 @@
 require_relative 'journey'
+
 class JourneyLog
 
   attr_reader :journeys
@@ -17,10 +18,6 @@ class JourneyLog
     @current_journey.finish(exitstation)
     @journeys << @current_journey
     @current_journey = nil
-  end
-
-  def complete?
-    !!@current_journey
   end
 
 end

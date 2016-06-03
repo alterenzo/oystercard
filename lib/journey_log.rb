@@ -4,9 +4,9 @@ class JourneyLog
   attr_reader :journeys
 
   def initialize(journey_class = Journey)
-      @journey_class = journey_class
-      @journeys = []
-      @current_journey = nil
+    @journey_class = journey_class
+    @journeys = []
+    @current_journey = nil
   end
 
   def start(entrystation)

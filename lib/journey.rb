@@ -5,13 +5,14 @@ class Journey
 	PENALTY_FARE = 6
   MIN_FARE = 2
 
+  attr_reader :exit_station, :entry_station
+
   def initialize(entrystation = nil)
     @entry_station = entrystation
   end
 
   def finish(exitstation)
     @exit_station = exitstation
-    self
   end
 
   def complete?

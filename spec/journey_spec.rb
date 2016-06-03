@@ -19,7 +19,7 @@ describe Journey do
 
   describe '#finish' do
     it 'remembers exit station' do
-      expect(journey.finish(exitstation)).to eq journey
+      expect(journey.finish(exitstation)).to eq exitstation
     end
   end
 
